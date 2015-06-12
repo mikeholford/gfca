@@ -1,5 +1,12 @@
 class AdvicesController < ApplicationController
 
+	def index
+		# If url does not match advice
+	  	if request.path != advice_index_path
+	      	redirect_to advice_index_path, status: :moved_permanently
+	  	end
+	end
+
 	def show
 		@advice = Advice.find(params[:id])
 
