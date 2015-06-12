@@ -1,0 +1,20 @@
+
+<div class="advice-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="well">
+
+					<%= link_to random_advice_path(:advice_id => @advice.id), class: "pull-right btn btn-success", data: {disable_with: "<i class='fa fa-refresh fa-spin fa-3x'></i>"} do %>
+  						<i class="fa fa-refresh fa-3x"></i>
+					<% end %>
+
+					<div class="advice">
+						<h1><em>#<%= @advice.id %></em></h1>
+						<h1 class="big"><%= @advice.body %></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
