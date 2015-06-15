@@ -7,12 +7,17 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">Got some good advice? Fucking write it below!</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body"> 
           <div class="form-group"> 
             <%= f.hidden_field :live, value: false %>
+            <%= f.label :body, "Advice" %>
             <%= f.text_field :body, class: "form-control" %><br>
-            <div class="alert alert-danger" id="form-error-text" style="display: none;"></div>
           </div>    
+          <div class="form-group"> 
+            <%= f.label :twitter_handle, "Twitter Handle (So we can attribute you)" %>
+            <%= f.text_field :twitter_handle, class: "form-control", placeholder: "@YourTwitterHandle" %>
+          </div>
+          <div class="alert alert-danger" id="form-error-text" style="display: none;"></div>
         </div>
         <div class="modal-footer">
           <div class="col-md-4 col-md-offset-8">

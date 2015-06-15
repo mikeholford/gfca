@@ -37,7 +37,7 @@ class AdvicesController < ApplicationController
   	private
 
 	def advice_params
-		params.require(:advice).permit(:body, :live)
+		params.require(:advice).permit(:body, :live, :twitter_handle)
 	end
 
 end

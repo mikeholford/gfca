@@ -13,6 +13,13 @@
 						<div class="advice">
 							<h2><em>GFCA #<%= @advice.id %></em></h2>
 							<h1 class="big"><%= @advice.body %></h1>
+							<% if @advice.twitter_handle.present? %>
+								<div class="row">
+									<div class="col-md-2 col-md-offset-10">
+										<small><em> by <%= link_to @advice.twitter_handle, "https://www.twitter.com/#{@advice.twitter_handle}" %> </em></small>
+									</div>
+								</div>
+							<% end %>
 						</div>
 					<% else %>
 						<em><h1>Error. Please refresh.</h1></em>
