@@ -10,7 +10,7 @@
 							<hr>
 
 							<ul>
-								<% @advices.limit(10).order('vote_total DESC').each do |a| %>	
+								<% @advices.limit(10).each do |a| %>	
 									<h2>
 										<em>GFCA #<%= a.id %></em>
 										(<%= a.vote_up %> Upvotes)
