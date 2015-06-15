@@ -15,8 +15,8 @@
 							<h1 class="big"><%= @advice.body %></h1>
 							<% if @advice.twitter_handle.present? %>
 								<div class="row">
-									<div class="col-md-2 col-md-offset-10">
-										<small><em> by <%= link_to @advice.twitter_handle, "https://www.twitter.com/#{@advice.twitter_handle}" %> </em></small>
+									<div class="col-md-3 col-md-offset-9">
+										<h4><em> by <%= link_to @advice.twitter_handle, "https://www.twitter.com/#{@advice.twitter_handle}" %> </em></h4>
 									</div>
 								</div>
 							<% end %>
