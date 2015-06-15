@@ -1,10 +1,11 @@
 class AdvicesController < ApplicationController
 
 	def index
+		@advices = Advice.where(live: true)
 		# If url does not match index
-	  	# if request.path != advice_index_path
-	   #    	redirect_to advice_index_path, status: :moved_permanently
-	  	# end
+	  	if request.path != advice_index_path
+	      	redirect_to advice_index_path, status: :moved_permanently
+	  	end
 	end
 
 	def show
@@ -34,10 +35,24 @@ class AdvicesController < ApplicationController
 	    end
   	end
 
+  	def upvote
+		@advice = Advice.find(params[:id])
+		@advice.update_attributes(vote_up: @advice.vote_up + 1)
+		@advice.update_attributes(vote_total: @advice.vote_total + 1)
+		redirect_to @advice
+	end
+
+	def downvote
+		@advice = Advice.find(params[:id])
+		@advice.update_attributes(vote_down: @advice.vote_down + 1)
+		@advice.update_attributes(vote_total: @advice.vote_total - 1)
+		redirect_to @advice
+	end
+
   	private
 
 	def advice_params
-		params.require(:advice).permit(:body, :live, :twitter_handle)
+		params.require(:advice).permit(:body, :live, :twitter_handle, :vote_up, :vote_down, :vote_total)
 	end
 
 end

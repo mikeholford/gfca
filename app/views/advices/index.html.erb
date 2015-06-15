@@ -5,9 +5,21 @@
 				<div class="well">
 					<div class="advice">
 						<div class="row">
-							<div class="col-md-10">
-								<h1 class="big">Get Started</h1>
-								<h2><em>Click refresh to generate some fucking great advice</em></h2>
+							<div class="col-md-12">
+							<ul>
+								<% @advices.each do |a| %>
+									<h2><em>GFCA #<%= a.id %></em></h2>
+									<h1 class="big"><%= link_to a.body, a %></h1>
+									<% if a.twitter_handle.present? %>
+										<div class="row">
+											<div class="col-md-3 col-md-offset-9">
+												<h4><em> by <%= link_to a.twitter_handle, "https://www.twitter.com/#{a.twitter_handle}" %> </em></h4>
+											</div>
+										</div>
+									<% end %>
+									<hr>
+								<% end %>
+							</ul>
 							</div>
 							<div class="col-md-2">
 								<%= link_to random_advice_path(:advice_id => 1), class: "btn btn-success", data: {disable_with: "<i class='fa fa-refresh fa-spin fa-3x'></i>"} do %>

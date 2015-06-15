@@ -6,9 +6,15 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'advices#index'
+  root 'statics#home'
   
-  resources :advices
+  resources :advices do 
+    member do
+      put :upvote
+      put :downvote
+    end
+  end
+  
   match '/advice', to: 'advices#index', as: 'advice_index', via: :get
   match '/advice/:id', to: 'advices#show', as: 'advice_show', via: :get
   get '/random', to: 'advices#random_advice', as: :random_advice

@@ -5,6 +5,12 @@
 .advice-wrapper {
 	.well {
 		margin-top: 50px;
+		.advice_actions {
+			a {
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+		}
 		.advice {
 			h1 {
 				font-size: 60px;

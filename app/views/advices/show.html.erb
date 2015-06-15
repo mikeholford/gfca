@@ -5,9 +5,22 @@
 			<div class="col-md-10 col-md-offset-1">
 				<div class="well">
 
-					<%= link_to random_advice_path(:advice_id => @advice.id), class: "pull-right btn btn-success", data: {disable_with: "<i class='fa fa-refresh fa-spin fa-3x'></i>"} do %>
-  						<i class="fa fa-refresh fa-3x"></i>
-					<% end %>
+
+					<div class="advice_actions">
+						<%= link_to random_advice_path(:advice_id => @advice.id), class: "pull-right btn btn-primary", data: {disable_with: "<i class='fa fa-refresh fa-spin fa-3x'></i>"} do %>
+	  						<i class="fa fa-refresh fa-3x"></i>
+						<% end %>
+
+						<%= link_to downvote_advice_path, method: :put, class: "pull-right btn btn-danger", id: "downvote", data: {disable_with: "<i class='fa fa-spinner fa-spin fa-3x'></i>"} do %>
+							<i class="fa fa-thumbs-down fa-3x"></i>
+						<% end %>
+	                      
+
+						<%= link_to upvote_advice_path, method: :put, class: "pull-right btn btn-success", id: "upvote", data: {disable_with: "<i class='fa fa-spinner fa-spin fa-3x'></i>"} do %>
+							<i class="fa fa-thumbs-up fa-3x"></i>
+	                    <% end %>
+	                </div>
+
 
 					<% if @advice.live == true %>
 						<div class="advice">
