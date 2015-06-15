@@ -6,9 +6,15 @@
 					<div class="advice">
 						<div class="row">
 							<div class="col-md-12">
+							<h1>The fucking top 10</h1>
+							<hr>
+
 							<ul>
-								<% @advices.each do |a| %>
-									<h2><em>GFCA #<%= a.id %></em></h2>
+								<% @advices.limit(10).order('vote_total DESC').each do |a| %>	
+									<h2>
+										<em>GFCA #<%= a.id %></em>
+										(<%= a.vote_up %> Upvotes)
+									</h2>
 									<h1 class="big"><%= link_to a.body, a %></h1>
 									<% if a.twitter_handle.present? %>
 										<div class="row">
@@ -20,11 +26,6 @@
 									<hr>
 								<% end %>
 							</ul>
-							</div>
-							<div class="col-md-2">
-								<%= link_to random_advice_path(:advice_id => 1), class: "btn btn-success", data: {disable_with: "<i class='fa fa-refresh fa-spin fa-3x'></i>"} do %>
-		  							<i class="fa fa-refresh fa-3x"></i>
-								<% end %>
 							</div>
 						</div>
 					</div>

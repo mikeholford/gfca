@@ -11,13 +11,17 @@
 	  						<i class="fa fa-refresh fa-3x"></i>
 						<% end %>
 
-						<%= link_to downvote_advice_path, method: :put, class: "pull-right btn btn-danger", id: "downvote", data: {disable_with: "<i class='fa fa-spinner fa-spin fa-3x'></i>"} do %>
-							<i class="fa fa-thumbs-down fa-3x"></i>
+						<%= link_to downvote_advice_path, method: :put, remote: true, class: "pull-right btn btn-danger", id: "downvote", onclick: "vote_down();" do %>
+							<i class="fa fa-thumbs-down fa-3x" id="thumbs_down"></i>
+							<i class="fa fa-spinner fa-spin fa-3x" id="thumbs_down_spinner" style="display: none;"></i>
+							<i class="fa fa-check fa-3x" id="thumbs_down_check" style="display: none;"></i>
 						<% end %>
 	                      
 
-						<%= link_to upvote_advice_path, method: :put, class: "pull-right btn btn-success", id: "upvote", data: {disable_with: "<i class='fa fa-spinner fa-spin fa-3x'></i>"} do %>
-							<i class="fa fa-thumbs-up fa-3x"></i>
+						<%= link_to upvote_advice_path, method: :put, remote: true, class: "pull-right btn btn-success", id: "upvote", onclick: "vote_up();" do %>
+							<i class="fa fa-thumbs-up fa-3x" id="thumbs_up"></i>
+							<i class="fa fa-spinner fa-spin fa-3x" id="thumbs_up_spinner" style="display: none;"></i>
+							<i class="fa fa-check fa-3x" id="thumbs_up_check" style="display: none;"></i>
 	                    <% end %>
 	                </div>
 
@@ -59,3 +63,47 @@
 		</div>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+	function vote_up(){
+		var upvote= document.getElementById('upvote');
+		var downvote= document.getElementById('downvote');
+		var thumbs_up= document.getElementById('thumbs_up');
+		var thumbs_down= document.getElementById('thumbs_down');
+		var thumbs_up_spinner= document.getElementById('thumbs_up_spinner');
+		var thumbs_down_spinner= document.getElementById('thumbs_down_spinner');
+		var thumbs_up_check= document.getElementById('thumbs_up_check');
+		var thumbs_down_check= document.getElementById('thumbs_down_check');
+
+		thumbs_up.style.display ='none';
+		thumbs_up_spinner.style.display ='inline';
+		downvote.className = downvote.className + " disabled";
+
+		setTimeout (function(){
+			thumbs_up_check.style.display ='inline';
+			thumbs_up_spinner.style.display ='none';
+			upvote.className = upvote.className + " disabled";
+		},250);
+	}
+	function vote_down(){
+		var upvote= document.getElementById('upvote');
+		var downvote= document.getElementById('downvote');
+		var thumbs_up= document.getElementById('thumbs_up');
+		var thumbs_down= document.getElementById('thumbs_down');
+		var thumbs_up_spinner= document.getElementById('thumbs_up_spinner');
+		var thumbs_down_spinner= document.getElementById('thumbs_down_spinner');
+		var thumbs_up_check= document.getElementById('thumbs_up_check');
+		var thumbs_down_check= document.getElementById('thumbs_down_check');
+
+		thumbs_down.style.display ='none';
+		thumbs_down_spinner.style.display ='inline';
+		upvote.className = upvote.className + " disabled";
+
+		setTimeout (function(){
+			thumbs_down_check.style.display ='inline';
+			thumbs_down_spinner.style.display ='none';
+			downvote.className = downvote.className + " disabled";
+		},250);
+	}
+</script>
