@@ -1,7 +1,7 @@
 class AdvicesController < ApplicationController
 
 	def index
-		# If url does not match advice
+		# If url does not match index
 	  	if request.path != advice_index_path
 	      	redirect_to advice_index_path, status: :moved_permanently
 	  	end
@@ -14,8 +14,16 @@ class AdvicesController < ApplicationController
 	  	if request.path != advice_show_path(@advice)
 	      	redirect_to advice_show_path(@advice), status: :moved_permanently
 	  	end
-
 	end
+
+	def create
+	    @new_advice = Advice.create(advice_params)
+	    if @new_advice.save
+	      redirect_to :back, notice: "Thanks! It may take an hour to go live as we need to validate all submissions!"
+	    else
+	      render root_url, alert: "Error"
+	    end
+  	end
 
 	def random_advice
 		@random = Advice.where(live: true).where.not(id: params[:advice_id].to_i).order('RANDOM()').limit(1).first
@@ -25,5 +33,11 @@ class AdvicesController < ApplicationController
 	      redirect_to :back and return
 	    end
   	end
+
+  	private
+
+	def advice_params
+		params.require(:advice).permit(:body, :live)
+	end
 
 end

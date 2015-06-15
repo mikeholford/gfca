@@ -52,4 +52,4 @@ gem 'bootstrap-sass', '~> 3.3.4' # Bootstrap CSS
 gem 'font-awesome-rails' # Font Awesome Icons
 gem 'activeadmin', github: 'activeadmin' # For viewing data
 gem 'devise' # For admin users
-
+gem 'social-share-button' # Used to generate share buttons

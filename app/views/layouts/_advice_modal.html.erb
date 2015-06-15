@@ -1,0 +1,57 @@
+<!-- Modal -->
+<div class="modal fade" id="adviceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @new_advice do |f| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Got some good advice? Fucking write it below!</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group"> 
+            <%= f.hidden_field :live, value: false %>
+            <%= f.text_field :body, class: "form-control" %><br>
+            <div class="alert alert-danger" id="form-error-text" style="display: none;"></div>
+          </div>    
+        </div>
+        <div class="modal-footer">
+          <div class="col-md-4 col-md-offset-8">
+            <%= f.button "Save", class: "btn btn-large btn-primary full-width", id: "saveButton" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+ $(document).ready(function () {
+
+      document.getElementById("saveButton").addEventListener("click", function(e){
+        var $form = $(this);
+        var form_err = 0;
+        $saveButton = $('#saveButton');
+        $form_error_text = $('#form-error-text');
+
+        // Check body
+        if ($('#advice_body').val().trim() == '') {
+          $('#advice_body').addClass("error_field");
+          form_err += 1;
+        }else {
+           $('#advice_body').removeClass("error_field");
+        }
+
+        if (form_err == 0) {
+            $saveButton.text('Saving...').addClass("disabled");
+            return true;
+        } else {
+          $form_error_text.text('Stop fucking around and write something...').show();
+            e.preventDefault();
+            return false;
+        }
+      });
+
+    });
+</script>
+
+

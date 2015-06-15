@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Gfca</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+	<head>
+		<title>Great Fucking Coding Advice</title>
 
-<%= render 'layouts/header' %>
+		<!-- Meta tag for responsive site -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<%= yield %>
-	
-<%= render 'layouts/footer' %>
+		<!-- Google Analytics Codes -->
+		<%= render 'layouts/google_analytics' %>
 
-</body>
+		<!-- Sumo Me Codes -->
+		<%#= render 'layouts/sumo_me' %>
+
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+
+		<%= render 'layouts/header' %>
+
+		<div class="home-notice-alert">
+		    <% if notice %>
+		      <p class="alert alert-success"><%= notice %></p>
+		    <% end %>
+		    <% if alert %>
+		      <p class="alert alert-danger"><%= alert %></p>
+		    <% end %>
+		</div>
+
+		<%= yield %>
+
+		<%= render 'layouts/advice_modal' %>
+		<%= render 'layouts/disclaimer_modal' %>
+			
+		<%= render 'layouts/footer' %>
+
+	</body>
 </html>
+
+
+
+
 
