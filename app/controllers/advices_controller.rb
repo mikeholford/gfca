@@ -1,7 +1,8 @@
 class AdvicesController < ApplicationController
 
 	def index
-		@advices = Advice.where(live: true)
+		@advices = Advice.where(live: true).order(:vote_total)
+
 		# If url does not match index
 	  	if request.path != advice_index_path
 	      	redirect_to advice_index_path, status: :moved_permanently
