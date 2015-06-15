@@ -17,8 +17,17 @@
 		}
 		.social-share {
 			a {
+				-moz-transition: all 0.1s;
+				-webkit-transition: all 0.1s;
+				transition: all 0.1s;
 				color: #2c3e50;
 				margin: 10px;
+				&:hover {
+					-moz-transition: all 0.1s;
+					-webkit-transition: all 0.1s;
+					transition: all 0.1s;
+					font-size: 18px;
+				}
 			}
 		}
 	}
