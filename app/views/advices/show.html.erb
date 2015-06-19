@@ -5,30 +5,35 @@
 			<div class="col-md-10 col-md-offset-1">
 				<div class="well">
 
-
-					<div class="advice_actions">
-						<%= link_to random_advice_path(:advice_id => @advice.id), class: "pull-right btn btn-primary", data: {disable_with: "<i class='fa fa-refresh fa-spin fa-3x'></i>"} do %>
-	  						<i class="fa fa-refresh fa-3x"></i>
-						<% end %>
-
-						<%= link_to downvote_advice_path, method: :put, remote: true, class: "pull-right btn btn-danger", id: "downvote", onclick: "vote_down();" do %>
-							<i class="fa fa-thumbs-down fa-3x" id="thumbs_down"></i>
-							<i class="fa fa-spinner fa-spin fa-3x" id="thumbs_down_spinner" style="display: none;"></i>
-							<i class="fa fa-check fa-3x" id="thumbs_down_check" style="display: none;"></i>
-						<% end %>
-	                      
-
-						<%= link_to upvote_advice_path, method: :put, remote: true, class: "pull-right btn btn-success", id: "upvote", onclick: "vote_up();" do %>
-							<i class="fa fa-thumbs-up fa-3x" id="thumbs_up"></i>
-							<i class="fa fa-spinner fa-spin fa-3x" id="thumbs_up_spinner" style="display: none;"></i>
-							<i class="fa fa-check fa-3x" id="thumbs_up_check" style="display: none;"></i>
-	                    <% end %>
-	                </div>
+					<div class="advice">
 
 
-					<% if @advice.live == true %>
-						<div class="advice">
+						<div class="col-md-6 col-md-push-6">
+							<div class="advice_actions">
+								<%= link_to upvote_advice_path, method: :put, remote: true, class: "btn btn-success", id: "upvote", onclick: "vote_up();" do %>
+									<i class="fa fa-thumbs-up fa-3x" id="thumbs_up"></i>
+									<i class="fa fa-spinner fa-spin fa-3x" id="thumbs_up_spinner" style="display: none;"></i>
+									<i class="fa fa-check fa-3x" id="thumbs_up_check" style="display: none;"></i>
+			                    <% end %>
+
+								<%= link_to downvote_advice_path, method: :put, remote: true, class: "btn btn-danger", id: "downvote", onclick: "vote_down();" do %>
+									<i class="fa fa-thumbs-down fa-3x" id="thumbs_down"></i>
+									<i class="fa fa-spinner fa-spin fa-3x" id="thumbs_down_spinner" style="display: none;"></i>
+									<i class="fa fa-check fa-3x" id="thumbs_down_check" style="display: none;"></i>
+								<% end %>
+
+			                    <%= link_to random_advice_path(:advice_id => @advice.id), class: "btn btn-primary", data: {disable_with: "<i class='fa fa-refresh fa-spin fa-3x'></i>"} do %>
+			  						<i class="fa fa-refresh fa-3x"></i>
+								<% end %>
+			                </div>
+			           	</div>
+
+			           	<div class="col-md-6 col-md-pull-6">
 							<h2><em>GFCA #<%= @advice.id %></em></h2>
+						</div>
+
+			           	<div class="col-md-12">
+
 							<h1 class="big"><%= @advice.body %></h1>
 							<% if @advice.twitter_handle.present? %>
 								<div class="row">
@@ -37,11 +42,15 @@
 									</div>
 								</div>
 							<% end %>
+
 						</div>
+					</div>
+
+					<div class="col-md-12">
 
 						<hr class="hr-dark">
 
-						<div class="social-share center" data-title="#GFCA" data-url="http://<%=request.host+request.fullpath%>" data-desc="" data-via="GFCodingAdvice" data-img="<%=root_url%>assets/shared/logo.png">
+						<div class="social-share center" data-title="Great Fucking Coding Advice!" data-url="http://<%=request.host+request.fullpath%>" data-desc="" data-via="GFCodingAdvice" data-img="<%=root_url%>assets/shared/logo.png">
 
 							<a rel="nofollow " data-site="twitter" class="social-share-twitter gfca-social" onclick="return SocialShareButton.share(this);" title="Share to Twitter" href="#"><i class="fa fa-twitter fa-4x"></i></a>
 
@@ -54,15 +63,54 @@
 							<br><br><small> Share this quote </small>
 						</div>
 
-					<% else %>
-						<em><h1>Error. Please refresh.</h1></em>
-					<% end %>
+					</div>
 
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<!-- shareModal -->
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Thank's for the fucking advice!</h3>
+      </div>
+      <div class="modal-body">
+      	<p>
+      		As the web is filled with <strong>fucking</strong> trolls, your advice is currently only viewable by direct link until we review it and make it live. In the mean time, feel free to <strong>share the fuck out of it!</strong> You've earned it sister.
+      	</p>
+      	<hr>
+      	<div class="social-share-modal center" data-title="I just added some great fucking coding advice to #GFCA" data-url="http://<%=request.host+request.fullpath%>" data-desc="" data-via="GFCodingAdvice" data-img="<%=root_url%>assets/shared/logo.png">
+
+			<a rel="nofollow " data-site="twitter" class="social-share-twitter gfca-social" onclick="return SocialShareButton.share(this);" title="Share to Twitter" href="#"><i class="fa fa-twitter fa-4x"></i></a>
+
+			<a rel="nofollow " data-site="facebook" class="social-share-facebook gfca-social" onclick="return SocialShareButton.share(this);" title="Share to Facebook" href="#"><i class="fa fa-facebook fa-4x"></i></a>
+
+			<a rel="nofollow " data-site="google_plus" class="social-share-google_plus gfca-social" onclick="return SocialShareButton.share(this);" title="Share to Google+" href="#"><i class="fa fa-google fa-4x"></i></a>
+
+			<a rel="nofollow " data-site="email" class="social-share-email gfca-social" onclick="return SocialShareButton.share(this);" title="Share to Google+" href="#"><i class="fa fa-envelope fa-4x"></i></a>
+
+			<br><br><small> Share this quote </small>
+		</div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if  session[:submission] == "true" %>
+	<script type="text/javascript">
+	    $(window).load(function(){
+	        $('#shareModal').modal('show');
+	    });
+	</script>
+	<% session[:submission] = nil %>
+<% end %>
 
 
 <script type="text/javascript">

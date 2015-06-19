@@ -11,7 +11,7 @@
           <div class="form-group"> 
             <%= f.hidden_field :live, value: false %>
             <%= f.label :body, "Advice" %>
-            <%= f.text_field :body, class: "form-control" %><br>
+            <%= f.text_field :body, class: "form-control", :autofocus => true %><br>
           </div>    
           <div class="form-group"> 
             <%= f.label :twitter_handle, "Twitter Handle (So we can attribute you)" %>
