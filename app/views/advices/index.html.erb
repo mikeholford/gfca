@@ -1,3 +1,22 @@
+
+<% if params[:sort].blank? %>
+	<% @param = "alltime" %>
+<% else %>
+	<% @param = params[:sort]%>
+<% end %>
+
+<% if params[:sort] == "last7" %>
+	<% @advices = @last7 %>
+	<% @title = "Last 7 days" %>
+<% elsif params[:sort] == "last24" %>
+	<% @advices = @last24 %>
+	<% @title = "Last 24 hours" %>
+<% else %>
+	<% @advices = @alltime %>
+	<% @title = "All Time" %>
+<% end %>
+
+
 <div class="advice-wrapper">
 	<div class="container">
 		<div class="row">
@@ -6,26 +25,30 @@
 					<div class="advice">
 						<div class="row">
 							<div class="col-md-12">
-							<h1>The fucking top 10</h1>
-							<hr>
+								<h1>The top fucking 10 - <em><small><%= @title %></small></em></h1>
 
-							<ul>
-								<% @advices.limit(10).each do |a| %>	
-									<h2>
-										<em>GFCA #<%= a.id %></em>
-										(<%= a.vote_up %> Upvotes)
-									</h2>
-									<h1 class="big"><%= link_to a.body, a %></h1>
-									<% if a.twitter_handle.present? %>
-										<div class="row">
-											<div class="col-md-3 col-md-offset-9">
-												<h4><em> by <%= link_to a.twitter_handle, "https://www.twitter.com/#{a.twitter_handle}" %> </em></h4>
+									<%= link_to "All Time", "/advice/", class: "btn btn-primary", id: "alltime" %>
+									<%= link_to "Last 7 days", "/advice/?sort=last7", class: "btn btn-primary", id: "last7" %>
+									<%= link_to "Last 24 hours", "/advice/?sort=last24", class: "btn btn-primary", id: "last24" %>
+
+								<hr>
+								<ul>
+									<% @advices.limit(10).each do |a| %>	
+										<h2>
+											<em>GFCA #<%= a.id %></em>
+											(<%= a.vote_up %> Upvotes)
+										</h2>
+										<h1 class="big"><%= link_to a.body, a %></h1>
+										<% if a.twitter_handle.present? %>
+											<div class="row">
+												<div class="col-md-3 col-md-offset-9">
+													<h4><em> by <%= link_to a.twitter_handle, "https://www.twitter.com/#{a.twitter_handle}" %> </em></h4>
+												</div>
 											</div>
-										</div>
+										<% end %>
+										<hr>
 									<% end %>
-									<hr>
-								<% end %>
-							</ul>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -34,3 +57,13 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+		$param = $('#<%=@param%>');
+
+		$param.addClass("disabled");
+
+	});
+</script>

@@ -3,6 +3,11 @@ class AdvicesController < ApplicationController
 	def index
 		@advices = Advice.where(live: true).order(vote_total: :desc)
 
+		@alltime = Advice.where(live: true).order(vote_total: :desc)
+		@last7 = Advice.where(live: true).order(vote_total: :desc).where("created_at >= ?", 1.week.ago)
+		@last24 = Advice.where(live: true).order(vote_total: :desc).where("created_at >= ?", 1.day.ago)
+
+
 		# If url does not match index
 	  	if request.path != advice_index_path
 	      	redirect_to advice_index_path, status: :moved_permanently
